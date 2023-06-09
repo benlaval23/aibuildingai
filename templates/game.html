@@ -114,12 +114,10 @@
             showLoadingIndicator(position);
         }
 
-        function showLoadingIndicator(position) {
-            var button = document.getElementById('button' + position);
-            var loadingIndicator = document.createElement('div');
-            loadingIndicator.className = 'loading-indicator';
-            button.appendChild(loadingIndicator);
-        }
+        function showLoadingIndicator() {
+            var loadingIndicator = document.getElementById('loadingIndicator');
+            loadingIndicator.style.display = 'block';
+    }
     </script>
 </head>
 <body>
