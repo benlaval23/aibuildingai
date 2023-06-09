@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            background-color: #222222;
+            color: #FFFFFF;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-top: 50px;
+        }
+
+        table {
+            margin: 50px auto;
+        }
+
+        td {
+            width: 100px;
+            height: 100px;
+            font-size: 36px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            background-color: #444444;
+            transition: background-color 0.3s;
+        }
+
+        td:hover {
+            background-color: #666666;
+        }
+
+        .message {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #666666;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #888888;
+}
+    </style>
+    <script>
+        function submitForm(position) {
+            document.getElementById('position').value = position;
+            document.getElementById('moveForm').submit();
+        }
+    </script>
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <form id="moveForm" method="POST" action="/move">
+        <input type="hidden" id="position" name="position" value="">
+    </form>
+    <form method="POST" action="/reset">
+        <input type="submit" value="Reset Game">
+    </form>
+    <table>
+        <tr>
+            <td onclick="submitForm(0)">{% if board[0] == ' ' %}<span style="display: none;">0</span>{% endif %}{{ board[0] }}</td>
+            <td onclick="submitForm(1)">{% if board[1] == ' ' %}<span style="display: none;">1</span>{% endif %}{{ board[1] }}</td>
+            <td onclick="submitForm(2)">{% if board[2] == ' ' %}<span style="display: none;">2</span>{% endif %}{{ board[2] }}</td>
+        </tr>
+        <tr>
+            <td onclick="submitForm(3)">{% if board[3] == ' ' %}<span style="display: none;">3</span>{% endif %}{{ board[3] }}</td>
+            <td onclick="submitForm(4)">{% if board[4] == ' ' %}<span style="display: none;">4</span>{% endif %}{{ board[4] }}</td>
+            <td onclick="submitForm(5)">{% if board[5] == ' ' %}<span style="display: none;">5</span>{% endif %}{{ board[5] }}</td>
+        </tr>
+        <tr>
+            <td onclick="submitForm(6)">{% if board[6] == ' ' %}<span style="display: none;">6</span>{% endif %}{{ board[6] }}</td>
+            <td onclick="submitForm(7)">{% if board[7] == ' ' %}<span style="display: none;">7</span>{% endif %}{{ board[7] }}</td>
+            <td onclick="submitForm(8)">{% if board[8] == ' ' %}<span style="display: none;">8</span>{% endif %}{{ board[8] }}</td>
+        </tr>
+    </table>
+    {% if check_winner(board) == 'X' %}
+        <p class="message">Congratulations! You won!</p>
+    {% elif check_winner(board) == 'O' %}
+        <p class="message">You got beaten by an AI which built an AI!</p>
+    {% elif is_board_full(board) %}
+        <p class="message">It's a draw!</p>
+    {% endif %}
+</body>
+</html>
